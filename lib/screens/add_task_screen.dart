@@ -31,6 +31,7 @@ class AddTaskScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             TextField(
+              autofocus: true,
               controller: titleController,
               decoration: const InputDecoration(
                 labelText: 'title',

@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 
 class Task extends Equatable {
@@ -36,4 +37,16 @@ class Task extends Equatable {
         isDone,
         isDeleted,
       ];
+
+  Task copyWith({
+    String? title,
+    bool? isDone,
+    bool? isDeleted,
+  }) {
+    return Task(
+      title: title ?? this.title,
+      isDone: isDone ?? this.isDone,
+      isDeleted: isDeleted ?? this.isDeleted,
+    );
+  }
 }

@@ -13,10 +13,23 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       emit(TaskState(taskList: List.from(state.taskList)..add(event.task)));
     });
     on<UpdateTask>((event, emit) {
-      // TODO: implement event handler
+      final state = this.state;
+      final task = event.task;
+      final index = state.taskList.indexOf(task);
+      print(event.task);
+
+      List<Task> taskList = List.from(state.taskList)..remove(task);
+
+      task.isDone == false
+          ? taskList.insert(index, task.copyWith(isDone: true))
+          : taskList.insert(index, task.copyWith(isDone: false));
+      print(state.taskList);
+      emit(TaskState(taskList: taskList));
     });
     on<DeleteTask>((event, emit) {
-      // TODO: implement event handler
+      final state = this.state;
+
+      emit(TaskState(taskList: List.from(state.taskList)..remove(event.task)));
     });
   }
 }
