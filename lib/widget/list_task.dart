@@ -19,7 +19,13 @@ class ListTask extends StatelessWidget {
         itemCount: taskList.length,
         itemBuilder: ((context, index) {
           return ListTile(
-            title: Text(taskList[index].title),
+            title: Text(
+              taskList[index].title,
+              style: TextStyle(
+                  decoration: taskList[index].isDone!
+                      ? TextDecoration.lineThrough
+                      : null),
+            ),
             trailing: Checkbox(
               value: taskList[index].isDone,
               onChanged: (value) => context.read<TaskBloc>()

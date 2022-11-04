@@ -2,6 +2,7 @@ import 'package:do_it/models/task.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:uuid/uuid.dart';
 
 import '../blocs/task_bloc/task_bloc.dart';
 
@@ -11,6 +12,8 @@ class AddTaskScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextEditingController titleController = TextEditingController();
+    var uuid = const Uuid();
+
     return SingleChildScrollView(
       child: Container(
         padding: EdgeInsets.only(
@@ -41,8 +44,8 @@ class AddTaskScreen extends StatelessWidget {
             const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
-                Task task = Task(title: titleController.text);
-                (context).read<TaskBloc>().add(AddTask(task: task));
+                Task task = Task(title: titleController.text, id: uuid.v4());
+                context.read<TaskBloc>().add(AddTask(task: task));
                 Navigator.of(context).pop();
               },
               child: const Text('Add'),
