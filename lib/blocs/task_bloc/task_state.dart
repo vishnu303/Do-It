@@ -4,17 +4,19 @@ part of 'task_bloc.dart';
 
 class TaskState extends Equatable {
   final List<Task> taskList;
+  final List<Task> removedTasks;
 
-  const TaskState({this.taskList = const []});
+  const TaskState({this.taskList = const [], this.removedTasks = const []});
 
   @override
-  List<Object> get props => [taskList];
+  List<Object> get props => [taskList, removedTasks];
 
-//toMap for hydratedBloc
+  //toMap for hydratedBloc
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'taskList': taskList.map((x) => x.toMap()).toList(),
+      'removedTasks': removedTasks.map((x) => x.toMap()).toList(),
     };
   }
 
@@ -27,10 +29,9 @@ class TaskState extends Equatable {
     //   ),
     // ));
     return TaskState(
-        taskList: List<Task>.from(
-      map['taskList'].map(
-        (x) => Task.fromMap(x),
-      ),
-    ));
+      taskList: List<Task>.from(map['taskList'].map((x) => Task.fromMap(x))),
+      removedTasks:
+          List<Task>.from(map['removedTasks'].map((x) => Task.fromMap(x))),
+    );
   }
 }

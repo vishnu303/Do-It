@@ -9,9 +9,12 @@ part 'task_state.dart';
 
 class TaskBloc extends HydratedBloc<TaskEvent, TaskState> {
   TaskBloc() : super(const TaskState()) {
+    // add task
     on<AddTask>((event, emit) {
       emit(TaskState(taskList: List.from(state.taskList)..add(event.task)));
     });
+
+    //update task when marked it as done
     on<UpdateTask>((event, emit) {
       final state = this.state;
       final task = event.task;
@@ -27,10 +30,26 @@ class TaskBloc extends HydratedBloc<TaskEvent, TaskState> {
       // print(state.taskList);
       emit(TaskState(taskList: taskList));
     });
+
+    // delete Task
     on<DeleteTask>((event, emit) {
       final state = this.state;
 
-      emit(TaskState(taskList: List.from(state.taskList)..remove(event.task)));
+      emit(TaskState(
+          taskList: state.taskList,
+          removedTasks: List.from(state.removedTasks)..remove(event.task)));
+    });
+
+    on<RemoveTask>((event, emit) {
+      final state = this.state;
+
+      emit(
+        TaskState(
+          taskList: List.from(state.taskList)..remove(event.task),
+          removedTasks: List.from(state.removedTasks)
+            ..add(event.task.copyWith(isDeleted: true)),
+        ),
+      );
     });
   }
 

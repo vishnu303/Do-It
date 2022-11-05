@@ -1,4 +1,5 @@
 import 'package:do_it/screens/add_task_screen.dart';
+import 'package:do_it/widget/my_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -46,6 +47,7 @@ class TaskScreen extends StatelessWidget {
             tooltip: 'Add Task',
             child: const Icon(Icons.add),
           ),
+          drawer: const MyDrawer(),
         );
       },
     );

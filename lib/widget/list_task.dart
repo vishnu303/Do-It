@@ -12,13 +12,19 @@ class ListTask extends StatelessWidget {
 
   final List<Task> taskList;
 
+  void _deleteOrRemove(BuildContext context, Task task) {
+    task.isDeleted!
+        ? context.read<TaskBloc>().add(DeleteTask(task: task))
+        : context.read<TaskBloc>().add(RemoveTask(task: task));
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        shrinkWrap: true,
-        itemCount: taskList.length,
-        itemBuilder: ((context, index) {
-          return ListTile(
+      shrinkWrap: true,
+      itemCount: taskList.length,
+      itemBuilder: ((context, index) {
+        return ListTile(
             title: Text(
               taskList[index].title,
               style: TextStyle(
@@ -26,15 +32,15 @@ class ListTask extends StatelessWidget {
                       ? TextDecoration.lineThrough
                       : null),
             ),
-            trailing: Checkbox(
-              value: taskList[index].isDone,
-              onChanged: (value) => context.read<TaskBloc>()
-                ..add(UpdateTask(task: taskList[index])),
-            ),
-            onLongPress: () => context.read<TaskBloc>().add(
-                  DeleteTask(task: taskList[index]),
-                ),
-          );
-        }));
+            trailing: !taskList[index].isDeleted!
+                ? Checkbox(
+                    value: taskList[index].isDone,
+                    onChanged: (value) => context.read<TaskBloc>()
+                      ..add(UpdateTask(task: taskList[index])),
+                  )
+                : null,
+            onLongPress: () => _deleteOrRemove(context, taskList[index]));
+      }),
+    );
   }
 }
