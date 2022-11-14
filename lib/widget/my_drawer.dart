@@ -23,7 +23,7 @@ class MyDrawer extends StatelessWidget {
               child: const Center(
                 child: Text(
                   'Hi, Welcome',
-                  style: TextStyle(fontSize: 30, color: Colors.white),
+                  style: TextStyle(fontSize: 25, color: Colors.white),
                 ),
               ),
             ),
