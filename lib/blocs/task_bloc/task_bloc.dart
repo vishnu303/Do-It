@@ -40,6 +40,7 @@ class TaskBloc extends HydratedBloc<TaskEvent, TaskState> {
           removedTasks: List.from(state.removedTasks)..remove(event.task)));
     });
 
+    //remove task from list
     on<RemoveTask>((event, emit) {
       final state = this.state;
 
@@ -53,6 +54,7 @@ class TaskBloc extends HydratedBloc<TaskEvent, TaskState> {
     });
   }
 
+  //json serializer for hydrated storage
   @override
   TaskState? fromJson(Map<String, dynamic> json) {
     return TaskState.fromMap(json);

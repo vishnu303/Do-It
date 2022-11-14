@@ -24,22 +24,29 @@ class ListTask extends StatelessWidget {
       shrinkWrap: true,
       itemCount: taskList.length,
       itemBuilder: ((context, index) {
-        return ListTile(
-            title: Text(
-              taskList[index].title,
-              style: TextStyle(
-                  decoration: taskList[index].isDone!
-                      ? TextDecoration.lineThrough
-                      : null),
+        //task list
+        return Column(
+          children: [
+            ListTile(
+              tileColor:
+                  taskList[index].isDone! ? const Color(0XFFE57373) : null,
+              title: Text(
+                taskList[index].title,
+                style: TextStyle(
+                    color: taskList[index].isDone! ? Colors.white : null),
+              ),
+              trailing: !taskList[index].isDeleted!
+                  ? Checkbox(
+                      activeColor: const Color(0XFFEF9A9A),
+                      value: taskList[index].isDone,
+                      onChanged: (value) => context.read<TaskBloc>()
+                        ..add(UpdateTask(task: taskList[index])),
+                    )
+                  : null,
+              onLongPress: () => _deleteOrRemove(context, taskList[index]),
             ),
-            trailing: !taskList[index].isDeleted!
-                ? Checkbox(
-                    value: taskList[index].isDone,
-                    onChanged: (value) => context.read<TaskBloc>()
-                      ..add(UpdateTask(task: taskList[index])),
-                  )
-                : null,
-            onLongPress: () => _deleteOrRemove(context, taskList[index]));
+          ],
+        );
       }),
     );
   }

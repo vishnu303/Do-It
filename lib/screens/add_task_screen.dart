@@ -16,6 +16,7 @@ class AddTaskScreen extends StatelessWidget {
 
     return SingleChildScrollView(
       child: Container(
+        color: const Color(0XFFE0F7FA),
         padding: EdgeInsets.only(
             bottom: MediaQuery.of(context).viewInsets.bottom,
             left: 20,
@@ -38,11 +39,18 @@ class AddTaskScreen extends StatelessWidget {
               controller: titleController,
               decoration: const InputDecoration(
                 labelText: 'title',
-                border: OutlineInputBorder(),
+                enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Color(0XFF00838F))),
+                border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Color(0XFF00838F))),
               ),
             ),
             const SizedBox(height: 10),
+
+            //add task button
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0XFF00838F)),
               onPressed: () {
                 Task task = Task(title: titleController.text, id: uuid.v4());
                 context.read<TaskBloc>().add(AddTask(task: task));
@@ -51,9 +59,14 @@ class AddTaskScreen extends StatelessWidget {
               child: const Text('Add'),
             ),
             const SizedBox(height: 10),
+
+            //cancel button
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: const Text('Cancel'),
+              child: const Text(
+                'Cancel',
+                style: TextStyle(color: Color(0XFF00838F)),
+              ),
             ),
             const SizedBox(height: 20),
           ],

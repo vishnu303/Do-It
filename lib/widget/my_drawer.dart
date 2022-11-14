@@ -12,20 +12,23 @@ class MyDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Drawer(
+        backgroundColor: const Color(0XFFE0F7FA),
         child: Column(
           children: [
             Container(
               padding: const EdgeInsets.all(10),
               width: double.infinity,
               height: MediaQuery.of(context).size.height * 0.1,
-              color: Colors.greenAccent,
+              color: const Color(0XFF00838F),
               child: const Center(
                 child: Text(
                   'Hi, Welcome',
-                  style: TextStyle(fontSize: 30),
+                  style: TextStyle(fontSize: 30, color: Colors.white),
                 ),
               ),
             ),
+
+            // to task Screen
             BlocBuilder<TaskBloc, TaskState>(
               builder: (context, state) {
                 return ListTile(
@@ -40,6 +43,8 @@ class MyDrawer extends StatelessWidget {
               },
             ),
             const Divider(thickness: 3),
+
+            //Recycle bin
             BlocBuilder<TaskBloc, TaskState>(
               builder: (context, state) {
                 return ListTile(

@@ -9,6 +9,7 @@ import '../widget/list_task.dart';
 class TaskScreen extends StatelessWidget {
   const TaskScreen({super.key});
 
+  //bottom sheet for adding task
   void _addTask(BuildContext context) {
     showModalBottomSheet(
         context: context,
@@ -34,15 +35,25 @@ class TaskScreen extends StatelessWidget {
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Center(
-                child: Chip(
-                  label: Text('Task'),
-                ),
-              ),
+              Container(
+                  color: const Color(0XFF00838F),
+                  height: 40,
+                  width: double.infinity,
+                  child: const Center(
+                      child: Text(
+                    'Task',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  ))),
               ListTask(taskList: state.taskList)
             ],
           ),
+
+          //button to add task
           floatingActionButton: FloatingActionButton(
+            backgroundColor: const Color(0XFF00838F),
             onPressed: () => _addTask(context),
             tooltip: 'Add Task',
             child: const Icon(Icons.add),

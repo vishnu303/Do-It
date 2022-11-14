@@ -12,7 +12,7 @@ void main() async {
 
   HydratedBloc.storage = await HydratedStorage.build(
       storageDirectory: await getApplicationDocumentsDirectory());
-  // HydratedBlocOverrides.runZoned(() => runApp(const MyApp()), storage: storage);
+
   runApp(const MyApp());
 }
 
@@ -23,10 +23,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => TaskBloc(),
-      child: const MaterialApp(
+      child: MaterialApp(
+        theme: ThemeData(
+          scaffoldBackgroundColor: const Color(0XFFE0F7FA),
+          backgroundColor: const Color(0XFFE0F7FA),
+          appBarTheme: const AppBarTheme(
+              backgroundColor: Color(0XFF00838F), elevation: 0),
+        ),
         debugShowCheckedModeBanner: false,
-        title: 'Bloc Demo',
-        home: TaskScreen(),
+        title: 'Do-It',
+        home: const TaskScreen(),
       ),
     );
   }
