@@ -33,7 +33,7 @@ class MyDrawer extends StatelessWidget {
               builder: (context, state) {
                 return ListTile(
                   leading: const Icon(Icons.task_alt_rounded),
-                  title: const Text('My Task'),
+                  title: const Text('My Tasks'),
                   trailing: Text('${state.taskList.length}'),
                   onTap: () {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(

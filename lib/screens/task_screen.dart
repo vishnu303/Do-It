@@ -41,7 +41,7 @@ class TaskScreen extends StatelessWidget {
                   width: double.infinity,
                   child: const Center(
                       child: Text(
-                    'Task',
+                    'Tasks',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,

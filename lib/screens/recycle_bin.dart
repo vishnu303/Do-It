@@ -19,11 +19,18 @@ class RecycleBin extends StatelessWidget {
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Center(
-                child: Chip(
-                  label: Text('Task'),
-                ),
-              ),
+              Container(
+                  color: const Color(0XFF00838F),
+                  height: 40,
+                  width: double.infinity,
+                  child: const Center(
+                      child: Text(
+                    'Deleted Tasks',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  ))),
               ListTask(taskList: state.removedTasks)
             ],
           ),
